@@ -2,23 +2,23 @@ import sqlite3 from "sqlite3"
 import { configENV } from "./config.js"
 
 const db = new sqlite3.Database(`./${configENV.db}`, (error) => {
-    if (error) {
-        return console.error("Ошибка с базой данных: ", error)
-    }
+	if (error) {
+		return console.error("Ошибка с базой данных: ", error)
+	}
 
-    console.log("Подключеник к базе данных успешно!");
+	console.log("Подключеник к базе данных успешно!")
 })
 
 db.run("PRAGMA foreign_keys = ON;", (error) => {
-    if (error) {
-        return console.error("Ошибка при включении внешних ключей: ", error)
-    }
+	if (error) {
+		return console.error("Ошибка при включении внешних ключей: ", error)
+	}
 
-    console.log("Успешное включение внешних ключей!");
+	console.log("Успешное включение внешних ключей!")
 })
 
 const createTables = {
-    users: `
+	users: `
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT NOT NULL UNIQUE,
@@ -28,7 +28,7 @@ const createTables = {
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
     `,
-    snippets: `
+	snippets: `
         CREATE TABLE IF NOT EXISTS snippets (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER NOT NULL,
@@ -42,19 +42,19 @@ const createTables = {
             FOREIGN KEY (language_id) REFERENCES language(id) ON DELETE CASCADE
         );
     `,
-    language: `
+	language: `
         CREATE TABLE IF NOT EXISTS language (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL UNIQUE
         );    
     `,
-    tags: `
+	tags: `
         CREATE TABLE IF NOT EXISTS tags (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL UNIQUE
         );
     `,
-    snippetsTags: `
+	snippetsTags: `
         CREATE TABLE IF NOT EXISTS snippets_tags (
             snippet_id INTEGER NOT NULL,
             tag_id INTEGER NOT NULL,
@@ -62,49 +62,49 @@ const createTables = {
             FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE,
             PRIMARY KEY (snippet_id, tag_id)
         );
-    `
+    `,
 }
 
 const tableSettings = () => {
-    db.run(createTables.users, (error) => {
-        if (error) {
-            return console.error("Ошибка при создании таблицы users: ", error)
-        }
+	db.run(createTables.users, (error) => {
+		if (error) {
+			return console.error("Ошибка при создании таблицы users: ", error)
+		}
 
-        console.log("Таблица успешно создана: users!")
-    })
+		console.log("Таблица успешно создана: users!")
+	})
 
-    db.run(createTables.snippets, (error) => {
-        if (error) {
-            return console.error("Ошибка при создании таблицы snippets: ", error)
-        }
+	db.run(createTables.snippets, (error) => {
+		if (error) {
+			return console.error("Ошибка при создании таблицы snippets: ", error)
+		}
 
-        console.log("Таблица успешно создана: snippets!")
-    })
+		console.log("Таблица успешно создана: snippets!")
+	})
 
-    db.run(createTables.language, (error) => {
-        if (error) {
-            return console.error("Ошибка при создании таблицы language: ", error)
-        }
+	db.run(createTables.language, (error) => {
+		if (error) {
+			return console.error("Ошибка при создании таблицы language: ", error)
+		}
 
-        console.log("Таблица успешно создана: language!")
-    })
+		console.log("Таблица успешно создана: language!")
+	})
 
-    db.run(createTables.tags, (error) => {
-        if (error) {
-            return console.error("Ошибка при создании таблицы tags: ", error)
-        }
+	db.run(createTables.tags, (error) => {
+		if (error) {
+			return console.error("Ошибка при создании таблицы tags: ", error)
+		}
 
-        console.log("Таблица успешно создана: tags!")
-    })
+		console.log("Таблица успешно создана: tags!")
+	})
 
-    db.run(createTables.snippetsTags, (error) => {
-        if (error) {
-            return console.error("Ошибка при создании таблицы snippetTags: ", error)
-            }
+	db.run(createTables.snippetsTags, (error) => {
+		if (error) {
+			return console.error("Ошибка при создании таблицы snippetTags: ", error)
+		}
 
-        console.log("Таблица успешно создана: snippetTags!")
-    })
+		console.log("Таблица успешно создана: snippetTags!")
+	})
 }
 
 tableSettings()
