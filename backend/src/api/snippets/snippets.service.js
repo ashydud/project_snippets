@@ -1,4 +1,10 @@
-import db from "../../db.js"
+import { snippetsModel } from "./snippets.model.js"
+import { SnipperNotFoundError, ValidationError } from "../../utils/handlerErrors.js"
+import { usersModel } from "../roles/roles.model.js"
+import { rolesModel } from "../roles/roles.model.js"
+import { languagesModel } from "../roles/roles.model.js"
+import { tagsModel } from "../roles/roles.model.js"
+
 
 export const createSnippet = ({ user_id, title, snippet, description, language_id, tag_ids }) => {
 

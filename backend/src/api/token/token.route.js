@@ -1,6 +1,8 @@
 import { configENV } from "../../config.js"
 import jwt from "jsonwebtoken"
 
+
+// Создание Токена
 export const generateToken = (user) => {
 	return jwt.sign(
 		{
@@ -13,6 +15,7 @@ export const generateToken = (user) => {
 	)
 }
 
+// Проверка токена
 export const middlewareVerifyToken = (request, response, next) => {
 	const authHeader = request.headers["authorization"]
 	if (authHeader) {

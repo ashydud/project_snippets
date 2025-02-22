@@ -1,8 +1,8 @@
 import express from "express"
-// import { userRouter } from "./modules/users/index.js"
+import { userRouter } from "./api/users/users.route.js"
 import { tagsRouter } from "./api/tags/tags.route.js"
 import { configENV } from "./config.js"
-// import { snippetsRouter } from "./modules/snippets/index.js"
+import { snippetsRouter } from "./api/snippets/snippets.route.js"
 import { languagesRouter } from "./api/languages/languages.route.js"
 import { rolesRouter } from "./api/roles/roles.route.js"
 import mongoose from "mongoose"
@@ -10,10 +10,10 @@ import mongoose from "mongoose"
 const app = express()
 app.use(express.json())
 
-// app.use("/api/users", userRouter)
+app.use("/api/users", userRouter)
 app.use("/api/tags", tagsRouter)
 app.use("/api/languages", languagesRouter)
-// app.use("/api/snippets", snippetsRouter)
+app.use("/api/snippets", snippetsRouter)
 app.use("/api/roles", rolesRouter)
 
 app.use((request, response, next) => {

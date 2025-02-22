@@ -24,6 +24,12 @@ export class LanguageNotFoundError extends CustomError {
     }
 }
 
+export class UserNotFoundError extends CustomError {
+    constructor(message) {
+        super(message, 400)
+    }
+}
+
 export class ValidationError extends CustomError {
     constructor(message) {
         super(message, 400)

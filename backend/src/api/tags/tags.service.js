@@ -1,5 +1,6 @@
 import { tagsModel } from "./tags.model.js"
 import { TagNotFoundError, ValidationError } from "../../utils/handlerErrors.js"
+
 export const createTag = async (name) => {
 	if (!name) {
 		throw new ValidationError("Имя Tag'а обязательное для заполнения!")
